@@ -1,5 +1,6 @@
 package died.guia06;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class Curso {
 		this.log = new Registro();
 	}
 	
+	public Integer getCreditos() {
+		return this.creditos;
+	}
+	
 
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
@@ -49,7 +54,7 @@ public class Curso {
 		try {
 		log.registrar(this, "inscribir ",a.toString());
 		}
-		catch(Exception e) {
+		catch(IOException e) {
 			System.out.println(e+" ERROR: no se ha podido inscribir al alumno.");
 		}
 		return false;
@@ -63,7 +68,7 @@ public class Curso {
 		try {
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		}
-		catch(Exception e) {
+		catch(IOException e) {
 			System.out.println(e+" ERROR: no se ha podido imprimir la lista");
 		}
 	}
