@@ -46,7 +46,12 @@ public class Curso {
 	 * @return
 	 */
 	public Boolean inscribir(Alumno a) {
+		try {
 		log.registrar(this, "inscribir ",a.toString());
+		}
+		catch(Exception e) {
+			System.out.println(e+" ERROR: no se ha podido inscribir al alumno.");
+		}
 		return false;
 	}
 	
@@ -55,7 +60,12 @@ public class Curso {
 	 * imprime los inscriptos en orden alfabetico
 	 */
 	public void imprimirInscriptos() {
+		try {
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		}
+		catch(Exception e) {
+			System.out.println(e+" ERROR: no se ha podido imprimir la lista");
+		}
 	}
 
 
