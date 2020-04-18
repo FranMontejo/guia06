@@ -116,11 +116,16 @@ public class Curso  {
 	/**
 	 * imprime los inscriptos en orden alfabetico
 	 */
-	public void imprimirInscriptos() {
-		
-		Collections.sort(this.inscriptos);
-		for(Alumno a: this.inscriptos) {
-			System.out.println(a.getNombre());
+	
+	/* Cambio el retorno de la función para poder realizar el testeo*/
+	
+	public boolean imprimirInscriptos() {
+		if(!this.inscriptos.isEmpty()) {
+			Collections.sort(this.inscriptos);
+			for(Alumno a: this.inscriptos) {
+				System.out.println(a.getNombre());
+			}
+			return true;
 		}
 		try {
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
@@ -128,6 +133,7 @@ public class Curso  {
 		catch(IOException e) {
 			System.out.println(e+" ERROR: no se ha podido imprimir la lista");
 		}
+		return false;
 	}
 
 
