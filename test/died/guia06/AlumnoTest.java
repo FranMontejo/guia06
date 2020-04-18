@@ -19,7 +19,6 @@ class AlumnoTest {
 
 	@BeforeEach
 	public void init() {
-		System.out.println("entre al before");
 		a1 = new Alumno("Francisco",130);
 		a2 = new Alumno("Federico",150);
 		c1 = new Curso(150,0,"Java");

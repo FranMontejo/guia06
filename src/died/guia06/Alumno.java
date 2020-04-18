@@ -22,7 +22,10 @@ public class Alumno implements Comparable<Alumno>{
 		new Alumno("",0);
 	}
 
-	public int creditosObtenidos() {
+	public Integer creditosObtenidos() {
+		if(this.aprobados.isEmpty()) {
+			return 0;
+		}
 		int cred = 0;
 		for(Curso c: aprobados) {
 			cred+= c.getCreditos();
@@ -42,6 +45,7 @@ public class Alumno implements Comparable<Alumno>{
 
 	public void inscripcionAceptada(Curso c) {
 		this.cursando.add(c);
+		
 	}
 
 	@Override
@@ -91,6 +95,13 @@ public class Alumno implements Comparable<Alumno>{
 	
 	public String getNombre() {
 		return this.nombre;
+	}
+	
+	public Boolean requisitosAlumno(Integer cred) {
+		if(this.creditosObtenidos() >= cred && this.cursando.size() <= 2) {
+			return true;
+		}
+		return false;
 	}
 
 }

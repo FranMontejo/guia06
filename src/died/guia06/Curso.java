@@ -2,6 +2,7 @@ package died.guia06;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import died.guia06.util.Registro;
@@ -14,7 +15,7 @@ import died.guia06.util.Registro;
  * @author marti
  *
  */
-public class Curso {
+public class Curso  {
 
 	private Integer id;
 	private String nombre;
@@ -36,10 +37,44 @@ public class Curso {
 		this.creditos = creditos;
 		this.creditosRequeridos = creditosR;
 		this.nombre = nombre;
-		new Curso();
+		this.cupo = 30;
+		this.inscriptos = new ArrayList<Alumno>();
+		this.log = new Registro();
 
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Integer getCupo() {
+		return cupo;
+	}
+
+	public void setCupo(Integer cupo) {
+		this.cupo = cupo;
+	}
+
+	public List<Alumno> getInscriptos() {
+		return inscriptos;
+	}
+
+	public void setInscriptos(List<Alumno> inscriptos) {
+		this.inscriptos = inscriptos;
+	}
+
+	public Integer getCreditosRequeridos() {
+		return creditosRequeridos;
+	}
+
+	public void setCreditosRequeridos(Integer creditosRequeridos) {
+		this.creditosRequeridos = creditosRequeridos;
+	}
+
 	public Integer getCreditos() {
 		return this.creditos;
 	}
@@ -59,12 +94,21 @@ public class Curso {
 	 * @return
 	 */
 	public Boolean inscribir(Alumno a) {
+		
+		if(a.requisitosAlumno(this.creditosRequeridos) && (this.inscriptos.size() < this.cupo)) {
+			this.inscriptos.add(a);
+			a.inscripcionAceptada(this);
+			return true;
+		}
 		try {
-		log.registrar(this, "inscribir ",a.toString());
+			 {
+				log.registrar(this, "inscribir ",a.toString());
+			}
 		}
 		catch(IOException e) {
 			System.out.println(e+" ERROR: no se ha podido inscribir al alumno.");
 		}
+		
 		return false;
 	}
 	
@@ -73,6 +117,11 @@ public class Curso {
 	 * imprime los inscriptos en orden alfabetico
 	 */
 	public void imprimirInscriptos() {
+		
+		Collections.sort(this.inscriptos);
+		for(Alumno a: this.inscriptos) {
+			System.out.println(a.getNombre());
+		}
 		try {
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		}
@@ -80,6 +129,7 @@ public class Curso {
 			System.out.println(e+" ERROR: no se ha podido imprimir la lista");
 		}
 	}
+
 
 
 }
