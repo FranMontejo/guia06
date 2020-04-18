@@ -95,7 +95,7 @@ public class Curso  {
 	 */
 	public Boolean inscribir(Alumno a) {
 		
-		if(a.requisitosAlumno(this.creditosRequeridos) && (this.inscriptos.size() < this.cupo)) {
+		if(a.requisitoCreditos(this.creditosRequeridos) && a.requisitoCursadas() &&(this.inscriptos.size() < this.cupo)) {
 			this.inscriptos.add(a);
 			a.inscripcionAceptada(this);
 			return true;
@@ -106,7 +106,7 @@ public class Curso  {
 			}
 		}
 		catch(IOException e) {
-			System.out.println(e+" ERROR: no se ha podido inscribir al alumno.");
+			System.out.println(e+" ERROR: no se ha podido guardar la operación.");
 		}
 		
 		return false;
@@ -120,13 +120,17 @@ public class Curso  {
 	/* Cambio el retorno de la función para poder realizar el testeo*/
 	
 	public boolean imprimirInscriptos() {
-		if(!this.inscriptos.isEmpty()) {
-			Collections.sort(this.inscriptos);
-			for(Alumno a: this.inscriptos) {
-				System.out.println(a.getNombre());
-			}
-			return true;
+		
+		if(this.inscriptos.isEmpty()) {
+			return false;
 		}
+		
+		Collections.sort(this.inscriptos);
+		
+		for(Alumno a: this.inscriptos) {
+			System.out.println(a.getNombre());
+		}
+		
 		try {
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		}
@@ -134,9 +138,38 @@ public class Curso  {
 			System.out.println(e+" ERROR: no se ha podido imprimir la lista");
 		}
 		System.out.println("No hay alumnos inscriptos a este curso");
-		return false;
+		return true;
 	}
 
-
-
+	//Paso 7: agregar método inscribirAlumno
+	
+	public void inscribirAlumno(Alumno a) throws NoCumpleCondicionesException 	{
+		
+		if(a.requisitoCreditos(this.creditosRequeridos)) {
+			if(a.requisitoCursadas()) {
+				if(this.inscriptos.size() < this.cupo) {
+					this.inscribir(a);
+				}
+				else {
+					throw new NoCumpleCondicionesException(3);
+					}
+				}
+			else {
+				throw new NoCumpleCondicionesException(2);
+			}
+		}
+		else {
+			throw new NoCumpleCondicionesException(1);
+		}
+	
+		try {
+			
+				log.registrar(this, "inscribir", a.toString());
+			}
+	
+		catch(IOException e) {
+			new RegistroAuditoriaException(e.toString());
+			
+		}
+	}
 }

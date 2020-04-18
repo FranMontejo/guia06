@@ -48,6 +48,7 @@ public class Alumno implements Comparable<Alumno>{
 		
 	}
 
+	//metodo equals
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -59,6 +60,8 @@ public class Alumno implements Comparable<Alumno>{
 		return false;
 	}
 
+	//GETTERS AND SETTERS
+	
 	public Integer getNroLibreta() {
 		return nroLibreta;
 	}
@@ -97,8 +100,17 @@ public class Alumno implements Comparable<Alumno>{
 		return this.nombre;
 	}
 	
-	public Boolean requisitosAlumno(Integer cred) {
-		if(this.creditosObtenidos() >= cred && this.cursando.size() <= 2) {
+	
+	// requisitos de los alumnos
+	public Boolean requisitoCreditos(Integer cred) {
+		if(this.creditosObtenidos() >= cred) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean requisitoCursadas() {
+		if(this.cursando.size() <= 2) {
 			return true;
 		}
 		return false;
