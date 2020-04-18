@@ -41,7 +41,14 @@ class CursoTest {
 		c1.inscribir(a3);
 		assertTrue(c1.imprimirInscriptos());
 		assertFalse(c2.imprimirInscriptos());
+	}
+	
+	@Test
+	void testInscribirAlumno() throws NoCumpleCondicionesException {
+		
+		assertTrue(c1.inscribirAlumno(a1));
 		
 	}
+	
 
 }

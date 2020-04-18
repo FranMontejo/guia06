@@ -143,7 +143,7 @@ public class Curso  {
 
 	//Paso 7: agregar método inscribirAlumno
 	
-	public void inscribirAlumno(Alumno a) throws NoCumpleCondicionesException 	{
+	public boolean inscribirAlumno(Alumno a) throws NoCumpleCondicionesException 	{
 		
 		if(a.requisitoCreditos(this.creditosRequeridos)) {
 			if(a.requisitoCursadas()) {
@@ -160,6 +160,7 @@ public class Curso  {
 		}
 		else {
 			throw new NoCumpleCondicionesException(1);
+			
 		}
 	
 		try {
@@ -171,5 +172,6 @@ public class Curso  {
 			new RegistroAuditoriaException(e.toString());
 			
 		}
+		return true;
 	}
 }
