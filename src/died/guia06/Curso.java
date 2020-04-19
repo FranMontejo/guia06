@@ -37,7 +37,7 @@ public class Curso  {
 		this.creditos = creditos;
 		this.creditosRequeridos = creditosR;
 		this.nombre = nombre;
-		this.cupo = 30;
+		this.cupo = 3;
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
 
@@ -122,6 +122,7 @@ public class Curso  {
 	public boolean imprimirInscriptos() {
 		
 		if(this.inscriptos.isEmpty()) {
+			System.out.println("No hay alumnos inscriptos a este curso");
 			return false;
 		}
 		
@@ -137,7 +138,7 @@ public class Curso  {
 		catch(IOException e) {
 			System.out.println(e+" ERROR: no se ha podido imprimir la lista");
 		}
-		System.out.println("No hay alumnos inscriptos a este curso");
+		
 		return true;
 	}
 
