@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Alumno implements Comparable<Alumno>{
+public class Alumno implements Comparable<Alumno> {
 
 	private String nombre;
 	private Integer nroLibreta;

@@ -39,8 +39,12 @@ class CursoTest {
 		c1.inscribir(a1);
 		c1.inscribir(a2);
 		c1.inscribir(a3);
-		assertTrue(c1.imprimirInscriptos());
-		assertFalse(c2.imprimirInscriptos());
+		assertTrue(c1.imprimirInscriptos1());
+		assertTrue(c1.imprimirInscriptos2());
+		assertTrue(c1.imprimirInscriptos3());
+		assertFalse(c2.imprimirInscriptos1());
+		assertFalse(c2.imprimirInscriptos2());
+		assertFalse(c2.imprimirInscriptos3());
 	}
 	
 	@Test

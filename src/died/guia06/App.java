@@ -30,18 +30,21 @@ public class App {
 		c5.inscribirAlumno(a1);
 		
 		
-		c1.imprimirInscriptos();
+		c1.imprimirInscriptos1();
 		System.out.println("------------");
-		c2.imprimirInscriptos();
+		c2.imprimirInscriptos1();
 		System.out.println(c2.inscribir(a1));
 		a1.aprobar(c1);
 		a2.aprobar(c1);
 		c2.inscribirAlumno(a1);
 		System.out.println("------------");
-
-		c1.imprimirInscriptos();
+		c1.imprimirInscriptos1();
 		System.out.println("------------");
-		c2.imprimirInscriptos();
+		c1.imprimirInscriptos2();
+		System.out.println("------------");
+		c1.imprimirInscriptos3();
+		System.out.println("------------");
+		c2.imprimirInscriptos1();
 		
 		
 	}

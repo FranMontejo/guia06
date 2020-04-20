@@ -3,6 +3,7 @@ package died.guia06;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import died.guia06.util.Registro;
@@ -119,7 +120,7 @@ public class Curso  {
 	
 	/* Cambio el retorno de la función para poder realizar el testeo*/
 	
-	public boolean imprimirInscriptos() {
+	public boolean imprimirInscriptos1() {
 		
 		if(this.inscriptos.isEmpty()) {
 			System.out.println("No hay alumnos inscriptos a este curso");
@@ -142,14 +143,83 @@ public class Curso  {
 		return true;
 	}
 
+	
+	// Ordenamiento por Numero de libreta
+	
+public boolean imprimirInscriptos2() {
+		
+		if(this.inscriptos.isEmpty()) {
+			System.out.println("No hay alumnos inscriptos a este curso");
+			return false;
+		}
+		
+		Collections.sort(this.inscriptos, 
+				new Comparator<Alumno>() {
+
+					@Override
+					public int compare(Alumno o1, Alumno o2) {
+						
+						return o1.getNroLibreta() - o2.getNroLibreta();
+					}
+				});
+		
+		for(Alumno a: this.inscriptos) {
+			System.out.println(a.getNombre());
+		}
+		
+		try {
+		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		}
+		catch(IOException e) {
+			System.out.println(e+" ERROR: no se ha podido registrar la operación");
+		}
+		
+		return true;
+	}
+	
+	
+	//Ordenamiento por cantidad de creditos
+
+public boolean imprimirInscriptos3() {
+	
+	if(this.inscriptos.isEmpty()) {
+		System.out.println("No hay alumnos inscriptos a este curso");
+		return false;
+	}
+	
+	Collections.sort(this.inscriptos,
+			new Comparator<Alumno>() {
+			@Override
+			public int compare(Alumno o1, Alumno o2) {
+				
+				return o1.creditosObtenidos() - o2.creditosObtenidos();
+			}
+			
+			});
+	
+	for(Alumno a: this.inscriptos) {
+		System.out.println(a.getNombre());
+	}
+	
+	try {
+	log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+	}
+	catch(IOException e) {
+		System.out.println(e+" ERROR: no se ha podido registrar la operación");
+	}
+	
+	return true;
+}
+	
 	//Paso 7: agregar método inscribirAlumno
 	
 	public boolean inscribirAlumno(Alumno a) throws NoCumpleCondicionesException 	{
 		
-		if(a.requisitoCreditos(this.creditosRequeridos)) {
+ 		if(a.requisitoCreditos(this.creditosRequeridos)) {
 			if(a.requisitoCursadas()) {
 				if(this.inscriptos.size() < this.cupo) {
-					this.inscribir(a);
+					this.inscriptos.add(a);
+					a.inscripcionAceptada(this);
 				}
 				else {
 					throw new NoCumpleCondicionesException(3);
